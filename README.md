@@ -5,6 +5,7 @@
 * python 3
 * Kivy v1.11.1
 * opencv v2 or v3 or v4
+* dlib v19
 * face-recognition v1.3
 * imutils (better the last version)
 * at least one web-cam
