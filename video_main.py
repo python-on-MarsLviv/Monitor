@@ -4,7 +4,6 @@ from videostream import VideoStream as VideoStream1
 from imutils import resize
 from imutils import face_utils
 
-import dlib
 import cv2
 
 from os.path import join
@@ -15,9 +14,6 @@ from datetime import datetime
 from threading import Thread
 from multiprocessing import Process
 from multiprocessing import Queue as  multiprocessing_Queue
-
-from kivy.graphics.texture import Texture
-from kivy.core.image import Image
 
 # custom modules
 from face_locator import face_locator
