@@ -1,0 +1,15 @@
+2020-06-22 18:20:30,858 [INFO|app_logger] [main:<module>:345] 	---	START APPLICATION	---
+2020-06-22 18:20:30,900 [INFO|app_logger] [main:build:275] Enter in to the build()
+2020-06-22 18:20:31,319 [INFO|app_logger] [main:build:297] registered cameras [0]
+2020-06-22 18:20:31,320 [INFO|app_logger] [main:build:316] Returning build()
+2020-06-22 18:21:18,502 [INFO|app_logger] [video_main:stop:395] exiting, check 0 Process state:False
+2020-06-22 18:21:18,502 [INFO|app_logger] [video_main:stop:396] exiting, check 1 Process state:False
+2020-06-22 18:21:18,502 [INFO|app_logger] [video_main:stop:397] exiting, check 2 Process state:False
+2020-06-22 18:21:18,517 [INFO|app_logger] [video_main:stop:413] exiting, check video_saver Process state:False
+2020-06-22 18:21:21,439 [INFO|app_logger] [video_main:processes_is_alive:475] Process video_saver could not start - exiting.
+2020-06-22 18:21:21,440 [INFO|app_logger] [video_main:start_process_loop:269] some Process dead
+2020-06-22 18:21:33,309 [INFO|app_logger] [video_main:stop:395] exiting, check 0 Process state:False
+2020-06-22 18:21:33,310 [INFO|app_logger] [video_main:stop:396] exiting, check 1 Process state:False
+2020-06-22 18:21:33,310 [INFO|app_logger] [video_main:stop:397] exiting, check 2 Process state:False
+2020-06-22 18:21:33,329 [INFO|app_logger] [video_main:stop:413] exiting, check video_saver Process state:False
+2020-06-22 18:21:35,272 [INFO|app_logger] [main:on_stop:333] 	---	APPLICATION STOPPED	---

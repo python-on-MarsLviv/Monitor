@@ -1,0 +1,328 @@
+
+<Collage>:
+	padding: 5
+    spacing: 5
+
+<Page1>:
+	link_to_scrollview: scrollview
+	link_to_info_label: info_label
+	link_to_text_input: text_input
+	link_to_collage: collage
+
+    orientation: 'vertical'
+    font_size: "20sp"
+    size_hint: 1, 1
+    padding: 5
+    spacing: 10
+    
+    canvas.before:
+        Color:
+            rgba: self.bg
+            rgba: [0, 0, 0, 1]
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    Label:
+		font_size: '20sp'
+		text: 'To enhance album select person and drag new picture on it'
+		text_size: self.size
+		halign: 'center'
+		valign: 'center'
+		size_hint: 1, .1
+		pos_hint: {"center_x": .5,"center_y": .5}
+	Label:
+		id: info_label
+		font_size: '20sp'
+		text: ''
+		text_size: self.size
+		halign: 'center'
+		valign: 'center'
+		size_hint: .8, .1
+		pos_hint: {"center_x": .5,"center_y": .5}
+
+	TextInput:
+		id: text_input
+		multiline: False
+		font_size: '20sp'
+		text: '<Type person\'s name>'
+		size_hint: .5, .1
+		pos_hint: {"center_x": .5,"center_y": .5}
+
+	ScrollView:								# pictures from DB
+		id: scrollview
+		padding: 5
+		size_hint: 1, .7
+		do_scroll_x: True
+		do_scroll_y: False
+		canvas.before:
+	        Color:
+	            rgba: self.bg
+	            rgba: [99/256, 99/256, 99/256, 1]
+	        Rectangle:
+	            size: self.size
+            	pos: self.pos
+        Collage:
+        	id: collage
+
+<Page2>:
+	link_to_btn_camera: btn_camera
+	link_to_btn_show_video: btn_show_video
+	link_to_slider_quality: slider_quality
+	link_to_check_box_marking: check_box_marking
+	link_to_check_box_video: check_box_video
+	link_to_check_box_picture: check_box_picture
+	link_to_btn_start_stop: btn_start_stop
+	link_to_image: image
+	link_to_fps_delay: fps_delay
+
+	id: link_to_page2
+    orientation: 'horizontal'
+    font_size: "20sp"
+    canvas.before:
+        Color:
+            rgba: self.bg
+            rgba: [0, 0, 0, 1]
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:								# menu
+		orientation: 'vertical'
+		size_hint: None, 1
+		size: 300, 300
+		#background_color: 1,1,0,.5
+		valign: 'top'
+
+		BoxLayout:							# camera / show-hide video
+			padding: 5
+			spacing: 10
+			size_hint: 1, .2
+
+			Button:
+				id: btn_camera
+				font_size: '15sp'
+				text: 'First camera'
+						
+			Button:
+				id: btn_show_video
+				font_size: '15sp'
+				text: 'Hide video'
+				on_press: root.on_show_video(self.text)
+
+		BoxLayout:	# quality
+			padding: 10
+			size_hint: 1, .2
+
+			Label:
+				font_size: '15sp'
+				text: 'Quality'
+				text_size: self.size
+				halign: 'left'
+				valign: 'center'
+
+			Slider:
+				id: slider_quality
+				min: 25
+				max: 100
+				step: 25
+				value: 50
+				on_value: root.on_slider_quality(self.value)
+			Label:
+				text: str(slider_quality.value) + ' %'
+				BoxLayout:
+					padding: [10, 10, 10, 10]
+			Button:
+				text: '?'
+				on_press: self.text = 'Reduce image size\nbefore processing'
+				on_release: self.text = '?'
+
+		BoxLayout:								# mark frames
+			padding: 10
+			size_hint: 1, .2
+
+			Label:
+				font_size: '15sp'
+				text: 'Mark frames with timestamp and names'
+				text_size: self.size
+				halign: 'left'
+				valign: 'center'
+				size_hint_x: .7
+
+			CheckBox:
+				id: check_box_marking
+				canvas.before:
+					Color:
+						rgb: 1,1,1
+					Rectangle:
+						pos:self.center_x-8, self.center_y-8
+						size:[16,16]
+					Color:
+						rgb: 0,0,0
+					Rectangle:
+						pos:self.center_x-6, self.center_y-6
+						size:[12,12]
+				on_active: root.on_checkbox_mark_click(self.active) 
+				size_hint_x: .3
+
+		BoxLayout:								# save video
+			padding: 10
+			size_hint: 1, .2
+
+			Label:
+				font_size: '15sp'
+				text: 'Save monitor video to file'
+				text_size: self.size
+				halign: 'left'
+				valign: 'center'
+				size_hint_x: .7
+
+			CheckBox:
+				id: check_box_video
+				canvas.before:
+					Color:
+						rgb: 1,1,1
+					Rectangle:
+						pos:self.center_x-8, self.center_y-8
+						size:[16,16]
+					Color:
+						rgb: 0,0,0
+					Rectangle:
+						pos:self.center_x-6, self.center_y-6
+						size:[12,12]
+				on_active: root.on_checkbox_click_video(self.active) 
+				size_hint_x: .3
+
+		BoxLayout:								# save picture
+			padding: 10
+			size_hint: 1, .2
+
+			Label:
+				font_size: '15sp'
+				text: 'Save monitor picture to file'
+				text_size: self.size
+				halign: 'left'
+				valign: 'center'
+				size_hint_x: .7
+
+			CheckBox:
+				id: check_box_picture
+				canvas.before:
+					Color:
+						rgb: 1,1,1
+					Rectangle:
+						pos:self.center_x-8, self.center_y-8
+						size:[16,16]
+					Color:
+						rgb: 0,0,0
+					Rectangle:
+						pos:self.center_x-6, self.center_y-6
+						size:[12,12] 
+		        on_active: root.on_checkbox_click_picture(self.active) 
+		        size_hint_x: .3
+
+		BoxLayout:								# fps / delay
+			padding: 10
+			size_hint: 1, .2
+
+			Label:
+				id: fps_delay
+				font_size: '15sp'
+				text: 'fps: 0,  delay: 0'
+				text_size: self.size
+				halign: 'left'
+				valign: 'center'
+				size_hint_x: .7
+
+
+		BoxLayout:								# start/stop
+			padding: 5
+			spacing: 10
+			size_hint: 1, .2
+					
+			Button:
+				id: btn_start_stop
+				font_size: '15sp'
+				text: 'Start'
+				on_release:	root.parent.parent.on_start_stop(self.text)
+
+			Button:
+				id: btn_help
+				font_size: '15sp'
+				text: 'Help'
+
+	AnchorLayout:
+		Image:
+			id: image
+			source: 'img/logo_big.png'
+			size: self.texture_size
+
+<Pages>:
+	link_to_page2: page2
+	padding: 5
+	spacing: 5
+	size_hint_y: .7
+
+    Page1:
+        orientation: 'vertical'
+    Page2:
+    	id: page2
+        orientation: 'horizontal'
+
+
+<Monitoring>:
+    link_to_monitoring_file: monitoring_file
+    link_to_monitoring_info: monitoring_info
+
+    orientation: 'vertical'
+	padding: 15
+	spacing: 5
+	size_hint_y: .3
+
+	canvas.before:
+	    Color:
+	        rgba: self.bg
+	        rgba: [0, 80/256, 80/256, 1]
+	    Rectangle:
+	        size: self.size
+            pos: self.pos
+
+    Label:
+        id: monitoring_file
+        text: 'Monitor file:'
+	    height: 20
+	    text_size: self.size
+	    text_pos: self.pos
+	    font_size: '20sp'
+	    halign: 'left'
+	    valign: 'top'
+	    color: 0, 180/256, 100/256, 1
+	    size_hint: 1, .25
+    
+	ScrollView:
+		id: monitoring_scroll
+		padding: 5
+		size_hint_y: 1
+	    halign: 'left'
+		valign: 'top'
+
+		Label:
+			id: monitoring_info
+			multiline: True
+			text:
+		        ("""Application started""")
+			font_size: '20sp'
+			size_hint: 1, None
+			text_size: self.width, self.height
+			height: root.height
+			halign: 'left'
+			valign: 'top'
+			color: 0,1,0,1
+
+<Container>:
+    orientation: 'vertical'
+    link_to_pages: pages
+    link_to_monitoring: monitoring
+
+    Pages:
+        id: pages
+    Monitoring:
+        id: monitoring
